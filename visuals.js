@@ -56,7 +56,7 @@ let logo = pickLogo()
 
 const animate = () => {
 
-  setInterval(animate, 1 / 30)
+  requestAnimationFrame(animate)
 
   c.fillStyle = '#222'
   c.fillRect(0, 0, canvas.width, canvas.height)
