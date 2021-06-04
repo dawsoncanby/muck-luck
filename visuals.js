@@ -45,25 +45,26 @@ const pickLogo = () => {
   return logos[idx]
 }
 
-let x = 0
-let y = 0
+let x = 10
+let y = 10
 let w = 360
 let h = 270
-let vx = 0.7
-let vy = 1.3
+let vx = 0.07
+let vy = 0.13
 
 let logo = pickLogo()
 
-const animate = () => {
-
+const animate = timestamp => {
+  timestamp = timestamp || 0
+  const progress = timestamp - lastRender
   requestAnimationFrame(animate)
 
   c.fillStyle = '#222'
   c.fillRect(0, 0, canvas.width, canvas.height)
   c.drawImage(logo, x, y, w, h)
 
-  x += vx
-  y += vy
+  x += vx * progress
+  y += vy * progress
 
   if (x <= 0 || x + w >= canvas.width) {
     logo = pickLogo()
@@ -74,7 +75,11 @@ const animate = () => {
     vy *= -1
   }
 
+  lastRender = timestamp
 }
+
+let lastRender = 0
+
 animate()
 
 
